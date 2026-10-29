@@ -19,6 +19,7 @@ dependencies = [
     "django-ninja==1.4.1",
     "jwtninja",
     "email-validator==2.1.1",
+    "gunicorn==26.2.0",
     "markdown==3.4.3",
     "parameterized==0.9.0",
     "psycopg2==2.9.6",
