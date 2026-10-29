@@ -7,7 +7,7 @@ RUN apk add --no-cache gcc musl-dev postgresql-dev
 
 RUN python -m venv /opt/venv
 
-COPY pyproject.toml README.md ./
+COPY pyproject.toml ./
 
 RUN /opt/venv/bin/pip install --no-cache-dir .
 
