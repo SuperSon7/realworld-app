@@ -28,5 +28,5 @@ COPY . .
 
 EXPOSE 8000
 
-# WSGI 앱 실행, 접근 로그는 표준 출력으로 전달
-CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000", "--access-logfile", "-"]
+# WSGI 앱 실행
+CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000"]
