@@ -84,21 +84,28 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 # The parsed format follows postgresql://[user[:password]@][netloc][:port][/dbname][?param1=value1&...]
+
 DATABASE_URL = getenv("DATABASE_URL")
+DB_PORT = getenv("DB_PORT")
+DB_USER = getenv("DB_USER")
+DB_NAME = getenv("DB_NAME")
+DB_HOST = getenv("DB_HOST")
+DB_PASSWORD = getenv("DB_PASSWORD")
+
 if DATABASE_URL and DATABASE_URL.startswith((":memory:", "file:")):
     if not DEBUG:
         raise RuntimeError("In-memory SQLite should only be used with DEBUG=True")
     DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": DATABASE_URL}}
-elif DATABASE_URL:
-    PARSED_DATABASE_URL = urlparse(DATABASE_URL)
+elif DB_PASSWORD:
+    # PARSED_DATABASE_URL = urlparse(DATABASE_URL)
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.postgresql",
-            "NAME": PARSED_DATABASE_URL.path[1:],
-            "USER": PARSED_DATABASE_URL.username,
-            "PASSWORD": PARSED_DATABASE_URL.password,
-            "HOST": PARSED_DATABASE_URL.hostname,
-            "PORT": PARSED_DATABASE_URL.port,
+            "NAME": DB_NAME,
+            "USER": DB_USER,
+            "PASSWORD": DB_PASSWORD,
+            "HOST": DB_HOST,
+            "PORT": DB_PORT,
         }
     }
 elif DEBUG:
